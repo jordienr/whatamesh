@@ -1,11 +1,31 @@
-# Vue 3 + Typescript + Vite
+# Whatamesh
 
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Easily create mesh gradients like Stripe.
 
-## Recommended IDE Setup
+This project wouldn't be possible without stripe and https://kevinhufnagl.com/
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+## Getting started
 
-## Type Support For `.vue` Imports in TS
+### Creating your first gradient
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's `.vue` type support plugin by running `Volar: Switch TS Plugin on/off` from VSCode command palette.
+```html
+<canvas id="gradient-canvas"></canvas>
+```
+
+```js
+import { Gradient } from "whatamesh";
+
+const gradient = new Gradient();
+gradient.initGradient("#gradient-canvas");
+```
+
+```css
+#gradient-canvas {
+  width: 100%;
+  height: 100%;
+  --gradient-color-1: #449ce4;
+  --gradient-color-2: #2f8bc1;
+  --gradient-color-3: #ccbeee;
+  --gradient-color-4: #4c57f6;
+}
+```

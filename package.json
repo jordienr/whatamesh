@@ -1,6 +1,7 @@
 {
   "name": "whatamesh",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "main": "./lib/",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
