@@ -7,15 +7,16 @@
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview"
   },
-  "dependencies": {
-    "sass": "^1.39.2",
-    "vue": "^3.2.6"
-  },
+  "files": [
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/jordienr/whatamesh"
   },
   "devDependencies": {
+    "vue": "^3.2.6",
+    "sass": "^1.39.2",
     "@vitejs/plugin-vue": "^1.6.1",
     "@vue/compiler-sfc": "^3.2.6",
     "typescript": "^4.3.2",
