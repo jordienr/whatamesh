@@ -11,6 +11,10 @@
     "sass": "^1.39.2",
     "vue": "^3.2.6"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jordienr/whatamesh"
+  },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.6.1",
     "@vue/compiler-sfc": "^3.2.6",
