@@ -1,6 +1,6 @@
 <template>
-  <h1>whatamesh</h1>
-
+  <h1 class="glitch" data-glitch="whatamesh">whatamesh</h1>
+  <h2>Find more amazing devtools 👉 <a href="http://toolhunt.dev">Toolhunt.dev</a></h2>
   <div>
     <div class="gradient-wrapper">
       <canvas ref="gc" id="gradient-canvas" data-transition-in :style="colors">
@@ -196,8 +196,8 @@ h1 {
   font-style: italic;
   padding-top: 1.5rem;
   font-size: 21px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
+  font-weight: 200;
+  letter-spacing: 4px;
 }
 .gradient-wrapper {
   margin: auto;
