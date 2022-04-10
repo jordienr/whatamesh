@@ -23,5 +23,8 @@
     "vite": "^2.5.4",
     "vue-tsc": "^0.2.2",
     "vue3-clipboard": "^1.0.0"
+  },
+  "dependencies": {
+    "color-schemes-generator": "^1.0.1"
   }
 }

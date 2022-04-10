@@ -84,6 +84,7 @@
 
 <script>
 import { Gradient } from "./script";
+import color from 'color-schemes-generator'
 
 export default {
   data() {
@@ -111,8 +112,8 @@ export default {
     colorChange() {
       this.refreshGradient();
     },
-    async refetch() {
-      await this.setNewPalette()
+    refetch() {
+      this.setNewPalette()
       this.refreshGradient();
     },
     refreshGradient() {
@@ -132,21 +133,6 @@ export default {
       const rgb = (red << 16) | (green << 8) | (blue << 0);
       return '#' + (0x1000000 + rgb).toString(16).slice(1);
     },
-    async fetchPalette() {
-       const resp = await fetch('http://colormind.io/api/', {
-        method: 'POST',
-        headers: {
-          Origin: 'http://colormind.io'
-        },
-        body: JSON.stringify({
-          model: 'default',
-        })
-      })
-      const data = await resp.json()
-      return data.result.map(color => {
-        return this.rgbToHex(color[0], color[1], color[2])
-      }).slice(0,4)
-    },
     logPalette(colors) {
       const d = colors.map((color, i) => {
         return `${color} ${i * 25}%, ${color} ${(i + 1) * 25}%`
@@ -157,8 +143,8 @@ export default {
       console.log(colors.slice(0,4).join('   '))
       console.log(a)
     },
-    async setNewPalette() {
-      const colors = await this.fetchPalette();
+    setNewPalette() {
+      const colors = color.generate()
       this.logPalette(colors)
       this.color1 = colors[0]
       this.color2 = colors[1]
