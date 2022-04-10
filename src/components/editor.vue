@@ -128,17 +128,24 @@ export default {
       }
       this.play = !this.play;
     },
+    rgbToHex(red, green, blue) {
+      const rgb = (red << 16) | (green << 8) | (blue << 0);
+      return '#' + (0x1000000 + rgb).toString(16).slice(1);
+    },
     async fetchPalette() {
-      let colors = []
-      // Sometimes returns an empty color scheme (?)
-      while (colors.length === 0) {
-        const resp = await fetch('https://www.colr.org/json/schemes/random/2?scheme_size_limit=>5');
-        const data = await resp.json();
-        if (data.schemes[0]?.colors) {
-          colors = data.schemes[0].colors;
-        }
-      }
-      return colors
+       const resp = await fetch('http://colormind.io/api/', {
+        method: 'POST',
+        headers: {
+          Origin: 'http://colormind.io'
+        },
+        body: JSON.stringify({
+          model: 'default',
+        })
+      })
+      const data = await resp.json()
+      return data.result.map(color => {
+        return this.rgbToHex(color[0], color[1], color[2])
+      }).slice(0,4)
     },
     logPalette(colors) {
       const d = colors.map((color, i) => {
@@ -152,12 +159,11 @@ export default {
     },
     async setNewPalette() {
       const colors = await this.fetchPalette();
-      const usableColors = colors.map(color => `#${color}`)
-      this.logPalette(usableColors)
-      this.color1 = usableColors[0]
-      this.color2 = usableColors[1]
-      this.color4 = usableColors[2]
-      this.color3 = usableColors[3]
+      this.logPalette(colors)
+      this.color1 = colors[0]
+      this.color2 = colors[1]
+      this.color4 = colors[2]
+      this.color3 = colors[3]
     }
   },
   computed: {
