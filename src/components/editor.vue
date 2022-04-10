@@ -75,7 +75,7 @@
       & <a target="_blank" href="https://github.com/ndom91">ndom91</a>
     </p>
     <p>
-      code by <a href="https://stripe.com/" target="_blank">stripe</a> and
+      gradient code by <a href="https://stripe.com/" target="_blank">stripe</a> and
       <a href="https://kevinhufnagl.com" target="_blank">kevinhufnagl</a>
     </p>
     <h2>Find more amazing devtools 👉 <a href="http://toolhunt.dev">Toolhunt.dev</a></h2>
@@ -140,12 +140,24 @@ export default {
       }
       return colors
     },
+    logPalette(colors) {
+      const d = colors.map((color, i) => {
+        return `${color} ${i * 25}%, ${color} ${(i + 1) * 25}%`
+      })
+      const a = "                                        "
+      const b = "); color: white; font-size:10px; text-shadow: #000 0px 0px 30px, rgba(0,0,0,0.5) 1px 1px; padding: 15px 0"
+      console.log('%c'.concat(a),"background: -webkit-linear-gradient(left, ".concat(d.join(','),b))
+      console.log(colors.slice(0,4).join('   '))
+      console.log(a)
+    },
     async setNewPalette() {
       const colors = await this.fetchPalette();
-      this.color1 = `#${colors[0]}`
-      this.color2 = `#${colors[1]}`
-      this.color4 = `#${colors[2]}`
-      this.color3 = `#${colors[3]}`
+      const usableColors = colors.map(color => `#${color}`)
+      this.logPalette(usableColors)
+      this.color1 = usableColors[0]
+      this.color2 = usableColors[1]
+      this.color4 = usableColors[2]
+      this.color3 = usableColors[3]
     }
   },
   computed: {
