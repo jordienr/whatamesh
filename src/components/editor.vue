@@ -1,39 +1,40 @@
 <template>
   <h1 class="glitch" data-glitch="whatamesh">whatamesh</h1>
-  <h2>Find more amazing devtools 👉 <a href="http://toolhunt.dev">Toolhunt.dev</a></h2>
-  <div>
-    <div class="gradient-wrapper">
-      <canvas ref="gc" id="gradient-canvas" data-transition-in :style="colors">
-        <!--
-        Remove data-js-darken-top to keep the same brightness in the upper part of the canvas
-      -->
-      </canvas>
-    </div>
-    <div class="tool-bar">
-      <input @change="colorChange" type="color" v-model="color1" />
-      <input @change="colorChange" type="color" v-model="color2" />
-      <input @change="colorChange" type="color" v-model="color3" />
-      <input @change="colorChange" type="color" v-model="color4" />
+  <div class="wrapper">
+    <div class="preview">
+      <div class="gradient-wrapper">
+        <canvas ref="gc" id="gradient-canvas" data-transition-in :style="colors">
+          <!--
+          Remove data-js-darken-top to keep the same brightness in the upper part of the canvas
+        -->
+        </canvas>
+      </div>
+      <div class="toolbar">
+        <p>
+          <input @change="colorChange" type="color" v-model="color1" />
+          {{ color1 }}
+        </p>
+        <p>
+          <input @change="colorChange" type="color" v-model="color2" />
+          {{ color2 }}
+        </p>
+        <p>
+          <input @change="colorChange" type="color" v-model="color3" />
+          {{ color3 }}
+        </p>
+        <p>
+          <input @change="colorChange" type="color" v-model="color4" />
+          {{ color4 }}
+        </p>
 
-      <!-- <button @click="togglePlayPause">⏯</button> -->
-      <!-- <button @click="toggleDarkenTop">toggle darken top</button> -->
-      <button @click="refreshGradient">refresh</button>
-      <button class="get-code-btn" @click="showCode = true">get code</button>
+        <!-- <button @click="togglePlayPause">⏯</button> -->
+        <!-- <button @click="toggleDarkenTop">toggle darken top</button> -->
+        <button @click="refetch">randomize</button>
+      </div>
     </div>
-    <footer>
-      <p>
-        tool by
-        <a target="_blank" href="https://twitter.com/jordienr">@jordienr</a>
-      </p>
-      <p>
-        code by <a href="https://stripe.com/" target="_blank">stripe</a> and
-        <a href="https://kevinhufnagl.com" target="_blank">kevinhufnagl</a>
-      </p>
-    </footer>
-    <div class="final-code" v-if="showCode">
-      <hr />
+    <div class="final-code">
       <h2>Installation</h2>
-      <p>
+      <p style="text-align:left">
         1. Create a Gradient.js file somewhere in your project and add
         <a
           target="_blank"
@@ -42,6 +43,7 @@
         >
         inside
       </p>
+      <p style="text-align:left"> 2. Add the following code to your HTML file:</p>
       <pre class="code"></pre>
       <h2><i>CSS</i></h2>
       <pre class="code">
@@ -66,6 +68,18 @@
       >
     </div>
   </div>
+  <footer>
+    <p>
+      tool by
+      <a target="_blank" href="https://twitter.com/jordienr">@jordienr</a>
+      & <a target="_blank" href="https://github.com/ndom91">ndom91</a>
+    </p>
+    <p>
+      code by <a href="https://stripe.com/" target="_blank">stripe</a> and
+      <a href="https://kevinhufnagl.com" target="_blank">kevinhufnagl</a>
+    </p>
+    <h2>Find more amazing devtools 👉 <a href="http://toolhunt.dev">Toolhunt.dev</a></h2>
+  </footer>
 </template>
 
 <script>
@@ -74,7 +88,6 @@ import { Gradient } from "./script";
 export default {
   data() {
     return {
-      showCode: false,
       play: true,
       gradient: new Gradient(),
       color1: "#c3e4ff",
@@ -98,6 +111,10 @@ export default {
     colorChange() {
       this.refreshGradient();
     },
+    async refetch() {
+      await this.setNewPalette()
+      this.refreshGradient();
+    },
     refreshGradient() {
       this.gradient = new Gradient();
       this.gradient.initGradient("#gradient-canvas");
@@ -111,12 +128,31 @@ export default {
       }
       this.play = !this.play;
     },
+    async fetchPalette() {
+      let colors = []
+      // Sometimes returns an empty color scheme (?)
+      while (colors.length === 0) {
+        const resp = await fetch('https://www.colr.org/json/schemes/random/2?scheme_size_limit=>5');
+        const data = await resp.json();
+        if (data.schemes[0]?.colors) {
+          colors = data.schemes[0].colors;
+        }
+      }
+      return colors
+    },
+    async setNewPalette() {
+      const colors = await this.fetchPalette();
+      this.color1 = `#${colors[0]}`
+      this.color2 = `#${colors[1]}`
+      this.color4 = `#${colors[2]}`
+      this.color3 = `#${colors[3]}`
+    }
   },
   computed: {
     darkenTop() {
       return document
         .getElementById("gradient-canvas")
-        .hasAttribute("data-js-darken-top");
+        ?.hasAttribute("data-js-darken-top");
     },
     cssCode() {
       return `
@@ -171,9 +207,6 @@ pre.code {
   background: white;
   color: black;
 }
-.final-code {
-  padding-bottom: 200px;
-}
 footer {
   margin-top: 3rem;
 }
@@ -199,6 +232,18 @@ h1 {
   font-weight: 200;
   letter-spacing: 4px;
 }
+.wrapper {
+  display: flex;
+  flex: 1 1;
+  width: 100%;
+  justify-content: center;
+}
+.preview {
+  margin: 0 4rem;
+}
+.final-code {
+  margin: 0 4rem;
+}
 .gradient-wrapper {
   margin: auto;
   margin-top: 2rem;
@@ -216,13 +261,31 @@ input[type="color"] {
   padding: 0;
   border: none;
   background: none;
-  height: 37px;
+  height: 45px;
   margin: 0;
   border: none;
 }
-.tool-bar {
+.toolbar {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  width: 300px;
+  margin: 0 auto;
+}
+.toolbar p {
+  display: flex; 
+  margin: 0;
+  font-size: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.toolbar button {
+  margin-top: 20px;
+  width: 100%;
+}
+.toolbar button:hover {
+  cursor: pointer;
 }
 </style>
