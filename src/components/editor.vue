@@ -39,8 +39,9 @@
         <a
           target="_blank"
           href="https://gist.github.com/jordienr/64bcf75f8b08641f205bd6a1a0d4ce1d"
-          >this</a
         >
+          this
+        </a>
         inside
       </p>
       <p style="text-align:left"> 2. Add the following code to your project:</p>
@@ -54,7 +55,6 @@
       </pre>
       <h2><i>JS</i></h2>
       <pre class="code">
-  
 import { Gradient } from './Gradient.js'
 
 // Create your instance
@@ -62,16 +62,14 @@ const gradient = new Gradient()
 
 // Call `initGradient` with the selector to your canvas
 gradient.initGradient('#gradient-canvas')
-  
-        </pre
-      >
+        </pre>
     </div>
   </div>
   <footer>
     <p>
       tool by
       <a target="_blank" href="https://twitter.com/jordienr">@jordienr</a>
-      & <a target="_blank" href="https://github.com/ndom91">ndom91</a>
+      & <a target="_blank" href="https://github.com/ndom91">@ndom91</a>
     </p>
     <p>
       gradient code by <a href="https://stripe.com/" target="_blank">stripe</a> and
@@ -158,7 +156,7 @@ export default {
         ?.hasAttribute("data-js-darken-top");
     },
     cssCode() {
-      return `
+      return (`
 #gradient-canvas {
   width:100%;
   height:100%;
@@ -166,16 +164,14 @@ export default {
   --gradient-color-2: ${this.color2}; 
   --gradient-color-3: ${this.color3};  
   --gradient-color-4: ${this.color4};
-}
-    `;
+}`
+      )
     },
     htmlCode() {
       return `
 <canvas id="gradient-canvas" ${
   this.darkenTop ? "data-js-darken-top " : ""
-}data-transition-in>
-</canvas>
-      `;
+}data-transition-in></canvas>`;
     },
     colors() {
       return {
