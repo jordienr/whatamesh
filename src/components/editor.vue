@@ -35,7 +35,7 @@
     <div class="final-code">
       <h2>Installation</h2>
       <p style="text-align:left">
-        1. Create a Gradient.js file somewhere in your project and add
+        1. Create a <code>Gradient.js</code> file somewhere in your project and add
         <a
           target="_blank"
           href="https://gist.github.com/jordienr/64bcf75f8b08641f205bd6a1a0d4ce1d"
@@ -43,26 +43,25 @@
         >
         inside
       </p>
-      <p style="text-align:left"> 2. Add the following code to your HTML file:</p>
-      <pre class="code"></pre>
-      <h2><i>CSS</i></h2>
-      <pre class="code">
-        {{ cssCode }}
-      </pre>
+      <p style="text-align:left"> 2. Add the following code to your project:</p>
       <h2><i>HTML</i></h2>
       <pre class="code">
         {{ htmlCode }}
       </pre>
+      <h2><i>CSS</i></h2>
+      <pre class="code">
+        {{ cssCode }}
+      </pre>
       <h2><i>JS</i></h2>
       <pre class="code">
   
-          import { Gradient } from './Gradient.js'
-  
-          // Create your instance
-          const gradient = new Gradient()
-  
-          // Call `initGradient` with the selector to your canvas
-          gradient.initGradient('#gradient-canvas')
+import { Gradient } from './Gradient.js'
+
+// Create your instance
+const gradient = new Gradient()
+
+// Call `initGradient` with the selector to your canvas
+gradient.initGradient('#gradient-canvas')
   
         </pre
       >
@@ -160,22 +159,22 @@ export default {
     },
     cssCode() {
       return `
-      #gradient-canvas {
-        width:100%;
-        height:100%;
-        --gradient-color-1: ${this.color1}; 
-        --gradient-color-2: ${this.color2}; 
-        --gradient-color-3: ${this.color3};  
-        --gradient-color-4: ${this.color4};
-      }
+#gradient-canvas {
+  width:100%;
+  height:100%;
+  --gradient-color-1: ${this.color1}; 
+  --gradient-color-2: ${this.color2}; 
+  --gradient-color-3: ${this.color3};  
+  --gradient-color-4: ${this.color4};
+}
     `;
     },
     htmlCode() {
       return `
-        <canvas id="gradient-canvas" ${
-          this.darkenTop ? "data-js-darken-top " : ""
-        }data-transition-in>
-        </canvas>
+<canvas id="gradient-canvas" ${
+  this.darkenTop ? "data-js-darken-top " : ""
+}data-transition-in>
+</canvas>
       `;
     },
     colors() {
@@ -206,13 +205,14 @@ pre.code {
   overflow: auto;
   margin: auto;
   background: rgb(27, 27, 27);
+  padding: 2rem;
 }
 .get-code-btn {
   background: white;
   color: black;
 }
 footer {
-  margin-top: 3rem;
+  margin: 4rem 0 2rem 0;
 }
 button {
   background: none;
@@ -291,5 +291,11 @@ input[type="color"] {
 }
 .toolbar button:hover {
   cursor: pointer;
+}
+
+@media screen and (max-width: 1024px) {
+  .wrapper {
+    flex-direction: column;
+  }
 }
 </style>

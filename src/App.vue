@@ -10,6 +10,7 @@ import editor from "./components/editor.vue";
 
 <style>
 body {
+  height: 100vh;
   margin: 0;
   padding: 0;
 }
@@ -18,6 +19,7 @@ body {
   color: white;
   font-family: monospace;
   min-height: 100vh;
+  padding: 2rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
