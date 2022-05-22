@@ -285,6 +285,11 @@ clipboard@^2.0.6:
     select "^1.1.2"
     tiny-emitter "^2.0.0"
 
+color-schemes-generator@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/color-schemes-generator/-/color-schemes-generator-1.0.1.tgz#10823c9605bb4ce1687666617844a4a091d8b9f2"
+  integrity sha512-pmXbEO84zprScjQR2C2wJ980VX0uk2FjUYvjOox91YnX5xgzeNvnCEhANgC7q3RLQE8GnKdJTAzpmbkJsa3LRg==
+
 colorette@^1.2.2:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/colorette/-/colorette-1.4.0.tgz#5190fbb87276259a86ad700bff2c6d6faa3fca40"
