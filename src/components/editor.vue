@@ -72,26 +72,33 @@ gradient.initGradient('#gradient-canvas')
     </div>
   </div>
   <footer>
-    <p>
-      tool by
-      <a target="_blank" href="https://twitter.com/jordienr">@jordienr</a>
-      & <a target="_blank" href="https://github.com/ndom91">@ndom91</a>
-    </p>
-    <p>
-      gradient code by
-      <a href="https://stripe.com/" target="_blank">stripe</a> and
-      <a href="https://kevinhufnagl.com" target="_blank">kevinhufnagl</a>
-    </p>
-    <h2>
-      Find more amazing devtools 👉
-      <a href="http://toolhunt.dev">Toolhunt.dev</a>
-    </h2>
+    <section>
+      <h2>Check my other apps!</h2>
+      <p><a href="http://weekops.com">WeekOps.com</a> a weekly planner</p>
+      <p>
+        <a href="http://toolhunt.dev">Toolhunt.dev</a> devtools to help you ship
+        faster
+      </p>
+    </section>
+
+    <section>
+      <p>
+        gradient code by
+        <a href="https://stripe.com/" target="_blank">stripe</a> and
+        <a href="https://kevinhufnagl.com" target="_blank">kevinhufnagl</a>
+      </p>
+      <p>
+        tool by
+        <a target="_blank" href="https://twitter.com/jordienr">@jordienr</a>
+        & <a target="_blank" href="https://github.com/ndom91">@ndom91</a>
+      </p>
+    </section>
   </footer>
 </template>
 
 <script>
-import { Gradient } from "./script"
-import color from "color-schemes-generator"
+import { Gradient } from "./script";
+import color from "color-schemes-generator";
 
 export default {
   data() {
@@ -103,63 +110,63 @@ export default {
       color3: "#eae2ff",
       color4: "#b9beff",
       darkenTop: false,
-    }
+    };
   },
   methods: {
     toggleDarkenTop() {
-      const el = document.getElementById("gradient-canvas")
+      const el = document.getElementById("gradient-canvas");
       if (this.darkenTop) {
-        el?.removeAttribute("data-js-darken-top")
-        this.darkenTop = false
+        el?.removeAttribute("data-js-darken-top");
+        this.darkenTop = false;
       } else {
-        el?.setAttribute("data-js-darken-top", "")
-        this.darkenTop = true
+        el?.setAttribute("data-js-darken-top", "");
+        this.darkenTop = true;
       }
-      this.refreshGradient()
+      this.refreshGradient();
     },
     colorChange() {
-      this.refreshGradient()
+      this.refreshGradient();
     },
     refetch() {
-      this.setNewPalette()
-      this.refreshGradient()
+      this.setNewPalette();
+      this.refreshGradient();
     },
     refreshGradient() {
-      this.gradient.initGradient("#gradient-canvas")
+      this.gradient.initGradient("#gradient-canvas");
     },
     togglePlayPause() {
       if (this.play) {
-        this.gradient.pause()
+        this.gradient.pause();
       } else {
-        this.gradient.play()
+        this.gradient.play();
       }
-      this.play = !this.play
+      this.play = !this.play;
     },
     rgbToHex(red, green, blue) {
-      const rgb = (red << 16) | (green << 8) | (blue << 0)
-      return "#" + (0x1000000 + rgb).toString(16).slice(1)
+      const rgb = (red << 16) | (green << 8) | (blue << 0);
+      return "#" + (0x1000000 + rgb).toString(16).slice(1);
     },
     logPalette(colors) {
       const d = colors.map((color, i) => {
-        return `${color} ${i * 25}%, ${color} ${(i + 1) * 25}%`
-      })
-      const a = "                                        "
+        return `${color} ${i * 25}%, ${color} ${(i + 1) * 25}%`;
+      });
+      const a = "                                        ";
       const b =
-        "); color: white; font-size:10px; text-shadow: #000 0px 0px 30px, rgba(0,0,0,0.5) 1px 1px; padding: 15px 0"
+        "); color: white; font-size:10px; text-shadow: #000 0px 0px 30px, rgba(0,0,0,0.5) 1px 1px; padding: 15px 0";
       console.log(
         "%c".concat(a),
         "background: -webkit-linear-gradient(left, ".concat(d.join(","), b)
-      )
-      console.log(colors.slice(0, 4).join("   "))
-      console.log(a)
+      );
+      console.log(colors.slice(0, 4).join("   "));
+      console.log(a);
     },
     setNewPalette() {
-      const colors = color.generate()
-      this.logPalette(colors)
-      this.color1 = colors[0]
-      this.color2 = colors[1]
-      this.color4 = colors[2]
-      this.color3 = colors[3]
+      const colors = color.generate();
+      this.logPalette(colors);
+      this.color1 = colors[0];
+      this.color2 = colors[1];
+      this.color4 = colors[2];
+      this.color3 = colors[3];
     },
   },
   computed: {
@@ -172,13 +179,13 @@ export default {
   --gradient-color-2: ${this.color2}; 
   --gradient-color-3: ${this.color3};  
   --gradient-color-4: ${this.color4};
-}`
+}`;
     },
     htmlCode() {
       return `
 <canvas id="gradient-canvas" ${
         this.darkenTop ? "data-js-darken-top " : ""
-      }data-transition-in />`
+      }data-transition-in />`;
     },
     colors() {
       return {
@@ -186,13 +193,13 @@ export default {
         "--gradient-color-2": this.color2,
         "--gradient-color-3": this.color3,
         "--gradient-color-4": this.color4,
-      }
+      };
     },
   },
   mounted() {
-    this.gradient.initGradient("#gradient-canvas")
+    this.gradient.initGradient("#gradient-canvas");
   },
-}
+};
 </script>
 
 <style scoped lang="scss">
