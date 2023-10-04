@@ -73,15 +73,6 @@ gradient.initGradient('#gradient-canvas')
   </div>
   <footer>
     <section>
-      <h2>Check my other apps!</h2>
-      <p><a href="http://weekops.com">WeekOps.com</a> a weekly planner</p>
-      <p>
-        <a href="http://toolhunt.dev">Toolhunt.dev</a> devtools to help you ship
-        faster
-      </p>
-    </section>
-
-    <section>
       <p>
         gradient code by
         <a href="https://stripe.com/" target="_blank">stripe</a> and
