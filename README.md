@@ -4,6 +4,10 @@ Easily create mesh gradients like Stripe.
 
 This project wouldn't be possible without stripe and https://kevinhufnagl.com/
 
+## Live Demo 
+
+[https://whatamesh.vercel.app/](https://whatamesh.vercel.app/)
+
 ## Getting started
 
 ### Creating your first gradient
