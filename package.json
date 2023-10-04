@@ -1,7 +1,8 @@
 {
   "name": "whatamesh",
   "version": "0.0.1",
-  "main": "./lib/",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
